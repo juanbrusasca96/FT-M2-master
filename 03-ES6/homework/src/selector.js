@@ -18,7 +18,7 @@ var traverseDomAndCollectElements = function (matchFunc, startEl) {
     resultSet = [...resultSet, ...result]
   }
   
-  return resultSet; 
+  return resultSet;
 };
 
 // Detecta y devuelve el tipo de selector
