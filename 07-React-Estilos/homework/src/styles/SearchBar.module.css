@@ -1,0 +1,15 @@
+.input {
+    border-radius: 11px 11px 11px 11px;
+-webkit-border-radius: 11px 11px 11px 11px;
+-moz-border-radius: 11px 11px 11px 11px;
+}
+
+.divSearchBar{
+    margin-bottom: 20px;
+}
+
+.boton{
+    color: green;
+    border: 1px solid green;
+    margin-left: 5px;
+}
