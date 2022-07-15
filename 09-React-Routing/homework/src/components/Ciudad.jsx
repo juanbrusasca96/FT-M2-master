@@ -1,27 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 
-export default function Ciudad({ onFilter }) {
-    const [city, setCity] = useState();
+export default function Ciudad({ city }) {
     const { ciudadId } = useParams();
-    useEffect(() => { setCity(onFilter(ciudadId)) }, [])
     return (
         <div className="ciudad">
-            {
-                city != undefined ?
-                <div className="container">
-                <h2>{city.name}</h2>
+            <div className="container">
+                <h2>{city(ciudadId).name}</h2>
                 <div className="info">
-                    <div>Temperatura: {city.temp} ºC</div>
-                    <div>Clima: {city.weather}</div>
-                    <div>Viento: {city.wind} km/h</div>
-                    <div>Cantidad de nubes: {city.clouds}</div>
-                    <div>Latitud: {city.latitud}º</div>
-                    <div>Longitud: {city.longitud}º</div>
+                    <div>Temperatura: {city(ciudadId).temp} ºC</div>
+                    <div>Clima: {city(ciudadId).weather}</div>
+                    <div>Viento: {city(ciudadId).wind} km/h</div>
+                    <div>Cantidad de nubes: {city(ciudadId).clouds}</div>
+                    <div>Latitud: {city(ciudadId).latitud}º</div>
+                    <div>Longitud: {city(ciudadId).longitud}º</div>
                 </div>
             </div>
-            :
-            <div></div>}
         </div>
     )
 }

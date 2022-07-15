@@ -49,19 +49,21 @@ function App() {
   }
   return (
     <BrowserRouter>
-    <div className="App">
-      <Routes>
-        <Route
-          path='/'
-          element={<Nav onSearch={onSearch} />}
+      <div className="App">
+        <Nav onSearch={onSearch}/>
+      {/*<div>
+        <Cards
+          cities={cities}
+          onClose={onClose}
         />
-        <Route
-          path='/about'
-          element={<About />}
-        />
-      </Routes>
-      <div>
+      </div>
+      <hr /> */}
+        {/* <Nav onSearch={onSearch} /> */}
         <Routes>
+          {/* <Route
+            index path='/'
+            element={<Nav onSearch={onSearch} />}
+          /> */}
           <Route
             path='/'
             element={<Cards
@@ -70,13 +72,15 @@ function App() {
             />}
           />
           <Route
-           path='/ciudad/:ciudadId'
-           element={<Ciudad onFilter={onFilter} />}
+            path='/about'
+            element={<About/>}
+          />
+          <Route
+            exact path='/ciudad/:ciudadId'
+            element={<Ciudad city={onFilter} />}
           />
         </Routes>
       </div>
-      <hr />
-    </div>
     </BrowserRouter>
   );
 }
