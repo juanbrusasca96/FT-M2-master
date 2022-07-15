@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import './App.css';
 import Nav from '../components/Nav.jsx';
 import Cards from '../components/Cards.jsx';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import Ciudad from '../components/Ciudad';
+import About from '../components/About';
 
 const apiKey = '4ae2636d8dfbdc3044bede63951a019b';
 
@@ -16,7 +19,7 @@ function App() {
     fetch(`http://api.openweathermap.org/data/2.5/weather?q=${ciudad}&appid=${apiKey}`)
       .then(r => r.json())
       .then((recurso) => {
-        if(recurso.main !== undefined){
+        if (recurso.main !== undefined) {
           const ciudad = {
             min: Math.round(recurso.main.temp_min),
             max: Math.round(recurso.main.temp_max),
@@ -38,23 +41,43 @@ function App() {
   }
   function onFilter(ciudadId) {
     let ciudad = cities.filter(c => c.id === parseInt(ciudadId));
-    if(ciudad.length > 0) {
-        return ciudad[0];
+    if (ciudad.length > 0) {
+      return ciudad[0];
     } else {
-        return null;
+      return null;
     }
   }
   return (
+    <BrowserRouter>
     <div className="App">
-      <Nav onSearch={onSearch}/>
-      <div>
-        <Cards
-          cities={cities}
-          onClose={onClose}
+      <Routes>
+        <Route
+          path='/'
+          element={<Nav onSearch={onSearch} />}
         />
+        <Route
+          path='/about'
+          element={<About />}
+        />
+      </Routes>
+      <div>
+        <Routes>
+          <Route
+            path='/'
+            element={<Cards
+              cities={cities}
+              onClose={onClose}
+            />}
+          />
+          <Route
+           path='/ciudad/:ciudadId'
+           element={<Ciudad onFilter={onFilter} />}
+          />
+        </Routes>
       </div>
       <hr />
     </div>
+    </BrowserRouter>
   );
 }
 
